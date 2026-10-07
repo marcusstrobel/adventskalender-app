@@ -1,4 +1,21 @@
 export const VERSION = 1;
+// Parse date inputs as local dates, avoiding UTC shifts on phones.
+export function calendarDate(testDate = "", now = new Date()) {
+  if (!testDate) return now;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(testDate);
+  if (!match) throw new Error("Bitte ein gültiges Testdatum auswählen.");
+  const [, year, month, day] = match.map(Number);
+  const date = new Date(0);
+  date.setFullYear(year, month - 1, day);
+  date.setHours(12, 0, 0, 0);
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  )
+    throw new Error("Bitte ein gültiges Testdatum auswählen.");
+  return date;
+}
 export function isUnlocked(day, now = new Date()) {
   return (
     Number.isInteger(day) &&

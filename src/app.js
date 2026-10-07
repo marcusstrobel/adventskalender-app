@@ -1,8 +1,5 @@
 import { verifyAdminPassword } from "./admin-auth.js";
-import {
-  isUnlocked,
-  validateConfig,
-} from "./core.js";
+import { isUnlocked, calendarDate, validateConfig } from "./core.js";
 const $ = (id) => document.getElementById(id);
 const KEYS = {
   config: "winterpost.config.v1",
@@ -14,6 +11,8 @@ let config,
   authenticated = false,
   pendingImage = "",
   imageBusy = false;
+let testDate = "",
+  testOpened = {};
 let opened = {},
   defaults;
 function tell(message) {
@@ -34,17 +33,21 @@ function read(key) {
   return raw ? JSON.parse(raw) : null;
 }
 function render() {
-  const now = new Date(),
+  const now = calendarDate(testDate),
     year = now.getFullYear();
   $("year").textContent = year;
   $("season-text").textContent =
     now.getMonth() === 11
       ? "Dein täglicher Moment im Advent"
       : "Die Vorfreude beginnt am 1. Dezember";
+  $("test-banner").hidden = !testDate;
+  $("test-banner").textContent = testDate
+    ? `Testmodus · ${now.toLocaleDateString("de-AT")} · Öffnungen werden nur für diesen Test gespeichert.`
+    : "";
   $("calendar").replaceChildren();
   let count = 0;
   for (const d of config.doors) {
-    const seen = opened[`${year}-${d.day}`] === true;
+    const seen = (testDate ? testOpened : opened)[`${year}-${d.day}`] === true;
     if (seen) count++;
     const available = d.enabled && isUnlocked(d.day, now);
     const b = document.createElement("button");
@@ -62,7 +65,8 @@ function render() {
     symbol.textContent = seen ? "✓" : available ? "✧" : !d.enabled ? "–" : "◌";
     b.append(number, symbol);
     b.onclick = () => {
-      if (!d.enabled || !isUnlocked(d.day)) {
+      const openingDate = calendarDate(testDate);
+      if (!d.enabled || !isUnlocked(d.day, openingDate)) {
         tell(
           !d.enabled
             ? "Dieses Türchen ist deaktiviert."
@@ -72,12 +76,15 @@ function render() {
         return;
       }
       const next = {
-        ...opened,
-        [`${new Date().getFullYear()}-${d.day}`]: true,
+        ...(testDate ? testOpened : opened),
+        [`${openingDate.getFullYear()}-${d.day}`]: true,
       };
       try {
-        write(KEYS.opened, next);
-        opened = next;
+        if (testDate) testOpened = next;
+        else {
+          write(KEYS.opened, next);
+          opened = next;
+        }
       } catch (e) {
         tell(e.message);
       }
@@ -99,7 +106,8 @@ function render() {
 }
 $("admin-open").onclick = () => {
   $("auth-title").textContent = "Willkommen zurück";
-  $("auth-help").textContent = "Öffne deine Kalenderwerkstatt mit dem Administrator-Passwort.";
+  $("auth-help").textContent =
+    "Öffne deine Kalenderwerkstatt mit dem Administrator-Passwort.";
   $("auth-error").textContent = "";
   $("auth-form").reset();
   $("auth-dialog").showModal();
@@ -119,12 +127,43 @@ $("auth-form").onsubmit = async (e) => {
     $("auth-form").reset();
     $("auth-dialog").close();
     loadEditor();
+    $("test-date").value = testDate || `${new Date().getFullYear()}-12-01`;
+    $("test-error").textContent = "";
+    $("test-state").textContent = testDate
+      ? "Testdatum aktiv. Schließe das Adminfenster, um die Türchen zu testen."
+      : "Das echte Datum ist aktiv.";
     $("admin-dialog").showModal();
   } catch (e) {
     $("auth-error").textContent = e.message;
   } finally {
     $("auth-submit").disabled = false;
   }
+};
+$("test-form").onsubmit = (e) => {
+  e.preventDefault();
+  if (!authenticated) return;
+  try {
+    calendarDate($("test-date").value);
+    if (!$("test-date").value)
+      throw new Error("Bitte ein Testdatum auswählen.");
+    testDate = $("test-date").value;
+    $("status").hidden = true;
+    $("test-error").textContent = "";
+    render();
+    $("test-state").textContent =
+      "Testdatum aktiv. Schließe das Adminfenster, um die Türchen zu testen.";
+  } catch (error) {
+    $("test-error").textContent = error.message;
+  }
+};
+$("test-reset").onclick = () => {
+  if (!authenticated) return;
+  testDate = "";
+  testOpened = {};
+  $("status").hidden = true;
+  $("test-error").textContent = "";
+  $("test-state").textContent = "Das echte Datum ist wieder aktiv.";
+  render();
 };
 function capture() {
   if (!authenticated) throw new Error("Bitte erneut anmelden.");

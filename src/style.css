@@ -471,3 +471,24 @@ textarea {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+.test-controls {
+  border-block: 1px solid #d5ddce;
+  padding: 8px 0 12px;
+  margin-top: 20px;
+}
+.test-controls .actions {
+  flex-wrap: wrap;
+}
+.test-banner {
+  background: #eae0cb;
+  border: 1px solid #d6c6a4;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#test-error {
+  color: #a03927;
+  font-size: 13px;
+}

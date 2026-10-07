@@ -36,6 +36,12 @@ Beim Veröffentlichen neuer App-Dateien die Cache-Version in `sw.js` erhöhen. D
 
 Ein Türchen wählen, Titel, Text, Aktivierung, Link und Button-Text bearbeiten. PNG-, JPEG- oder WebP-Bilder bis 300 KB werden eingebettet. „Änderungen speichern“ speichert den gesamten Entwurf. Wechsel zwischen Türchen übernimmt Eingaben in den Entwurf; Schließen verwirft seit dem letzten Speichern vorgenommene Änderungen. „Kalender zurücksetzen“ ersetzt nach Bestätigung die Inhalte durch die Beispiele, erhält aber Passwort und Öffnungsfortschritt.
 
+### Testdatum
+
+Im Adminfenster unter „Kalender testen“ ein Datum wählen und „Testdatum setzen“ drücken. Das Adminfenster schließen, um Türchen im Kalender zu öffnen. Bei einem Dezemberdatum sind alle aktivierten Türchen bis einschließlich dieses Tags verfügbar; außerhalb des Dezembers bleiben sie wie im normalen Betrieb gesperrt. Eine sichtbare Meldung kennzeichnet den Testmodus.
+
+„Echtes Datum verwenden“ beendet den Test. Der Testmodus bleibt beim Schließen des Adminfensters aktiv, endet aber auch beim Neuladen. Testöffnungen werden ausschließlich im Arbeitsspeicher gehalten; der reguläre Öffnungsfortschritt bleibt erhalten. Testdatum und Testöffnungen werden nicht exportiert.
+
 ### Sicherheitsgrenzen und Wiederherstellung
 
 Das Passwort wird nicht gespeichert. Web Crypto leitet mit PBKDF2-SHA-256, 310.000 Iterationen und einem zufälligen 16-Byte-Salt einen 256-Bit-Prüfwert ab. Nur Salt und Prüfwert liegen in `src/admin-auth.js`; das Passwort ist weder im Repository noch im Export enthalten. Alte lokale Passwortdatensätze werden nicht mehr verwendet.

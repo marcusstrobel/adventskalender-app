@@ -51,6 +51,7 @@
           <span>DEZEMBER <span id="year"></span></span
           ><span id="progress"></span>
         </div>
+        <p id="test-banner" class="test-banner" role="status" hidden></p>
         <div id="calendar" class="calendar"></div>
         <div class="legend">
           <span>◌ Noch ein wenig Vorfreude</span><span>✧ Bereit zum Öffnen</span
@@ -91,8 +92,8 @@
             id="password"
             type="password"
             required
-            autocomplete="current-password" /></label
-        >
+            autocomplete="current-password"
+        /></label>
         <p id="auth-error" role="alert"></p>
         <button class="primary" id="auth-submit">Weiter</button>
       </form>
@@ -112,6 +113,25 @@
       <p class="eyebrow">WERKSTATT</p>
       <h2>Vorfreude gestalten</h2>
       <p>Wähle ein Türchen und fülle es mit einem kleinen Moment.</p>
+      <section class="test-controls" aria-label="Kalender testen">
+        <h3>Kalender testen</h3>
+        <p class="small">
+          Simuliere ein Datum. Im Dezember sind alle aktivierten Türchen bis zu
+          diesem Tag verfügbar. Der Testmodus gilt bis zum Neuladen oder
+          Zurücksetzen.
+        </p>
+        <form id="test-form">
+          <label>Testdatum<input id="test-date" type="date" required /></label>
+          <div class="actions">
+            <button type="button" id="test-reset">
+              Echtes Datum verwenden
+            </button>
+            <button class="primary" type="submit">Testdatum setzen</button>
+          </div>
+          <p id="test-error" role="alert"></p>
+          <p id="test-state" class="small" role="status"></p>
+        </form>
+      </section>
       <div
         id="admin-days"
         class="admin-days"
