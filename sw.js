@@ -1,4 +1,4 @@
-const CACHE = "winterpost-v4";
+const CACHE = "winterpost-v5";
 const FILES = [
   "./",
   "./index.html",

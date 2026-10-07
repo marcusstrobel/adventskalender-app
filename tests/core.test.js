@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import {
   isUnlocked,
+  loadDoorOrder,
+  DOOR_ORDER_KEY,
   calendarDate,
   validateConfig,
   passwordRecord,
@@ -81,4 +83,62 @@ test("Ungültige Testdaten werden nicht still auf einen anderen Tag verschoben",
   ])
     assert.throws(() => calendarDate(value));
   assert.equal(calendarDate("2028-02-29").getDate(), 29);
+});
+
+test("Zufällige Türverteilung enthält jeden Tag einmal und bleibt nach erneutem Laden gleich", () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value),
+  };
+  const order = loadDoorOrder(storage, undefined, () => 0);
+  assert.deepEqual(
+    [...order].sort((a, b) => a - b),
+    Array.from({ length: 24 }, (_, i) => i + 1),
+  );
+  assert.notDeepEqual(
+    order,
+    Array.from({ length: 24 }, (_, i) => i + 1),
+  );
+  assert.deepEqual(JSON.parse(values.get(DOOR_ORDER_KEY)), order);
+  assert.deepEqual(
+    loadDoorOrder(storage, undefined, () => {
+      throw new Error("Must not reshuffle");
+    }),
+    order,
+  );
+});
+test("Beschädigte Reihenfolge wird durch eine vollständige Verteilung ersetzt", () => {
+  for (const saved of [
+    "ungültiges JSON",
+    JSON.stringify(Array(24).fill(1)),
+    JSON.stringify(Array.from({ length: 24 }, (_, i) => i)),
+    "[]",
+    "{}",
+  ]) {
+    let value = saved;
+    const order = loadDoorOrder({
+      getItem: () => value,
+      setItem: (_, next) => (value = next),
+    });
+    assert.equal(new Set(order).size, 24);
+    assert.deepEqual(JSON.parse(value), order);
+    assert.ok(order.every((day) => day >= 1 && day <= 24));
+  }
+});
+test("Gesperrter Speicher meldet Fehler, ohne die Kalenderanzeige zu verhindern", () => {
+  let reported = false;
+  const order = loadDoorOrder(
+    {
+      getItem: () => {
+        throw new Error("blocked");
+      },
+      setItem: () => {
+        throw new Error("blocked");
+      },
+    },
+    () => (reported = true),
+  );
+  assert.equal(order.length, 24);
+  assert.equal(reported, true);
 });

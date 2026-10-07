@@ -16,6 +16,8 @@ Für den Betrieb alle öffentlichen Dateien auf einen statischen HTTPS-Webserver
 
 ## Kalender und Zeit
 
+Die 24 Türchen werden beim ersten Aufruf zufällig angeordnet. Ihre Reihenfolge wird gerätelokal unter `winterpost.order.v1` gespeichert und bleibt bei Neuladen, erneutem Öffnen, Inhaltsimport und Kalender-Zurücksetzen gleich. Andere Geräte erhalten ihre eigene Verteilung. Wird der Browserspeicher gelöscht oder eine beschädigte Reihenfolge gefunden, entsteht eine neue Verteilung.
+
 Türchen öffnen jährlich vom jeweiligen 1.–24. Dezember an bis Ende Dezember nach der lokalen Gerätezeit. Januar bis November sind sie gesperrt. Deaktivierte Türchen bleiben gesperrt. Die Uhr wird beim Öffnen erneut geprüft und die Ansicht jede Minute sowie bei Rückkehr zur App aktualisiert. Fortschritt wird unter dem jeweiligen Jahr lokal gespeichert. Eine manipulierte Geräteuhr kann die Freigabe umgehen.
 
 ## PWA installieren und offline nutzen

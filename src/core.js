@@ -1,4 +1,35 @@
 export const VERSION = 1;
+export const DOOR_ORDER_KEY = "winterpost.order.v1";
+export function loadDoorOrder(
+  storage,
+  onError = () => {},
+  random = Math.random,
+) {
+  try {
+    const saved = JSON.parse(storage.getItem(DOOR_ORDER_KEY));
+    if (
+      Array.isArray(saved) &&
+      saved.length === 24 &&
+      new Set(saved).size === 24 &&
+      saved.every((day) => Number.isInteger(day) && day >= 1 && day <= 24)
+    ) {
+      return saved;
+    }
+  } catch (error) {
+    // Invalid JSON is replaced; blocked storage is reported on the write below.
+  }
+  const order = Array.from({ length: 24 }, (_, i) => i + 1);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  try {
+    storage.setItem(DOOR_ORDER_KEY, JSON.stringify(order));
+  } catch (error) {
+    onError(error);
+  }
+  return order;
+}
 // Parse date inputs as local dates, avoiding UTC shifts on phones.
 export function calendarDate(testDate = "", now = new Date()) {
   if (!testDate) return now;

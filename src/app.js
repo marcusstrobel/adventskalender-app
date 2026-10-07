@@ -1,5 +1,10 @@
 import { verifyAdminPassword } from "./admin-auth.js";
-import { isUnlocked, calendarDate, validateConfig } from "./core.js";
+import {
+  isUnlocked,
+  calendarDate,
+  validateConfig,
+  loadDoorOrder,
+} from "./core.js";
 const $ = (id) => document.getElementById(id);
 const KEYS = {
   config: "winterpost.config.v1",
@@ -13,6 +18,7 @@ let config,
   imageBusy = false;
 let testDate = "",
   testOpened = {};
+let doorOrder = [];
 let opened = {},
   defaults;
 function tell(message) {
@@ -46,7 +52,8 @@ function render() {
     : "";
   $("calendar").replaceChildren();
   let count = 0;
-  for (const d of config.doors) {
+  for (const day of doorOrder) {
+    const d = config.doors[day - 1];
     const seen = (testDate ? testOpened : opened)[`${year}-${d.day}`] === true;
     if (seen) count++;
     const available = d.enabled && isUnlocked(d.day, now);
@@ -363,6 +370,11 @@ try {
     await (await fetch("example-calendar.json")).json(),
   );
   config = defaults;
+  doorOrder = loadDoorOrder(localStorage, () => {
+    tell(
+      "Die Türchen-Reihenfolge konnte nicht gespeichert werden. Bitte Browserspeicher erlauben, damit die Anordnung beim nächsten Öffnen erhalten bleibt.",
+    );
+  });
   try {
     const stored = read(KEYS.config);
     if (stored) config = validateConfig(stored);
