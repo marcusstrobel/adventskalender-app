@@ -13,6 +13,12 @@
 }
 body {
   margin: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 button,
 input,
@@ -51,9 +57,10 @@ button:disabled {
   opacity: 0.5;
 }
 header {
-  max-width: 1120px;
-  margin: auto;
-  padding: 26px 32px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(4px, 1.6dvh, 16px) clamp(12px, 3vw, 32px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -68,6 +75,7 @@ header {
   display: flex;
   gap: 10px;
   align-items: center;
+  min-width: 0;
 }
 .brand span {
   font-size: 36px;
@@ -82,10 +90,17 @@ header {
   border: 0;
 }
 main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 0 28px;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: clamp(6px, 1.6dvh, 20px) clamp(12px, 3vw, 28px);
 }
+.calendar-section {
+  height: 100%;
+  min-height: 0;
+}
+
 .eyebrow {
   font-size: 11px;
   font-weight: bold;
@@ -94,12 +109,16 @@ main {
 }
 .calendar {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 13px;
+  height: 100%;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: clamp(4px, 1.2vmin, 13px);
 }
 .tile {
-  aspect-ratio: 1/1.08;
   min-width: 0;
+  min-height: 0;
+  padding: 0;
+  container-type: size;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
@@ -131,7 +150,7 @@ main {
 .tile::before {
   content: "";
   position: absolute;
-  inset: 8px;
+  inset: clamp(3px, 5cqw, 8px);
   border: 1px solid currentColor;
   opacity: 0.18;
   border-radius: 5px;
@@ -152,13 +171,14 @@ main {
 }
 .number {
   font-family: Georgia, serif;
-  font-size: clamp(27px, 4vw, 45px);
+  font-size: clamp(12px, min(42cqw, 50cqh), 56px);
+  transform: translateY(-4cqh);
   font-weight: normal;
 }
 .tile-symbol {
   position: absolute;
-  bottom: 12px;
-  font-size: 15px;
+  bottom: clamp(2px, 6cqh, 12px);
+  font-size: clamp(8px, min(16cqw, 20cqh), 16px);
   opacity: 0.75;
 }
 .tile.available {
@@ -335,8 +355,11 @@ textarea {
   gap: 12px;
 }
 .status {
-  position: sticky;
-  bottom: 12px;
+  position: fixed;
+  z-index: 1;
+  left: 12px;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
   background: #193e35;
   color: white;
   padding: 15px;
@@ -348,27 +371,12 @@ textarea {
   display: none !important;
 }
 @media (max-width: 600px) {
-  header {
-    padding: 16px 20px;
-  }
   .brand {
     font-size: 23px;
   }
-  main {
-    padding: 0 18px;
-  }
   .calendar {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  .tile {
-    aspect-ratio: 1.04;
-  }
-  .number {
-    font-size: 34px;
-  }
-  .tile-symbol {
-    bottom: 9px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(6, minmax(0, 1fr));
   }
   dialog {
     padding: 32px 22px;
@@ -385,14 +393,6 @@ textarea {
     transition: none !important;
   }
 }
-@media (display-mode: standalone) {
-  header {
-    padding-top: max(16px, env(safe-area-inset-top));
-  }
-  body {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
 
 .test-controls {
   border-block: 1px solid #d5ddce;
@@ -407,9 +407,6 @@ textarea {
   font-size: 13px;
 }
 
-.calendar-section {
-  padding: 28px 0;
-}
 .brand {
   font-size: clamp(18px, 4.7vw, 26px);
 }
@@ -423,7 +420,11 @@ header {
   .brand span {
     font-size: 25px;
   }
-  .calendar-section {
-    padding: 20px 0;
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .calendar {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
   }
 }

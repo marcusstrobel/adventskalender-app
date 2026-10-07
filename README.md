@@ -16,6 +16,8 @@ Für den Betrieb alle öffentlichen Dateien auf einen statischen HTTPS-Webserver
 
 ## Kalender und Zeit
 
+Überschrift und alle 24 Kacheln passen in die aktuelle Bildschirmfläche. Das Raster nutzt die dynamische Viewporthöhe (`dvh`), berücksichtigt Smartphone-Sicherheitsabstände und wechselt zwischen 4 × 6 (Smartphone hochkant), 8 × 3 (flaches Querformat) und 6 × 4 (größere Ansichten). Kacheln und Zahlen passen sich an die verbleibende Fläche an. Inhalte und Adminformulare können innerhalb ihrer Dialoge weiterhin scrollen.
+
 Die 24 Türchen werden beim ersten Aufruf zufällig angeordnet. Ihre Reihenfolge wird gerätelokal unter `winterpost.order.v1` gespeichert und bleibt bei Neuladen, erneutem Öffnen, Inhaltsimport und Kalender-Zurücksetzen gleich. Andere Geräte erhalten ihre eigene Verteilung. Wird der Browserspeicher gelöscht oder eine beschädigte Reihenfolge gefunden, entsteht eine neue Verteilung.
 
 Türchen öffnen jährlich vom jeweiligen 1.–24. Dezember an bis Ende Dezember nach der lokalen Gerätezeit. Januar bis November sind sie gesperrt. Deaktivierte Türchen bleiben gesperrt. Die Uhr wird beim Öffnen erneut geprüft und die Ansicht jede Minute sowie bei Rückkehr zur App aktualisiert. Fortschritt wird unter dem jeweiligen Jahr lokal gespeichert. Eine manipulierte Geräteuhr kann die Freigabe umgehen.
