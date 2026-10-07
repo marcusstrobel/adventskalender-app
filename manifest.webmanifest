@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Winterpost – Dein Adventskalender",
-  "short_name": "Winterpost",
+  "name": "Advent, Advent, ...",
+  "short_name": "Advent, Advent",
   "lang": "de",
   "start_url": "./",
   "scope": "./",

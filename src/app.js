@@ -41,21 +41,10 @@ function read(key) {
 function render() {
   const now = calendarDate(testDate),
     year = now.getFullYear();
-  $("year").textContent = year;
-  $("season-text").textContent =
-    now.getMonth() === 11
-      ? "Dein täglicher Moment im Advent"
-      : "Die Vorfreude beginnt am 1. Dezember";
-  $("test-banner").hidden = !testDate;
-  $("test-banner").textContent = testDate
-    ? `Testmodus · ${now.toLocaleDateString("de-AT")} · Öffnungen werden nur für diesen Test gespeichert.`
-    : "";
   $("calendar").replaceChildren();
-  let count = 0;
   for (const day of doorOrder) {
     const d = config.doors[day - 1];
     const seen = (testDate ? testOpened : opened)[`${year}-${d.day}`] === true;
-    if (seen) count++;
     const available = d.enabled && isUnlocked(d.day, now);
     const b = document.createElement("button");
     b.className = `tile ${seen ? "seen" : ""} ${available ? "available" : "locked"}`;
@@ -109,7 +98,6 @@ function render() {
     };
     $("calendar").append(b);
   }
-  $("progress").textContent = `${count} / 24 entdeckt`;
 }
 $("admin-open").onclick = () => {
   $("auth-title").textContent = "Willkommen zurück";

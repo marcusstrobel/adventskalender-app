@@ -1,4 +1,4 @@
-# Winterpost
+# Advent, Advent, ...
 
 Eine mobile Adventskalender-PWA ohne Framework, Build-Schritt, Laufzeitabhängigkeiten oder externe Dienste. 24 Türchen, lokale Konfiguration und jährlicher Öffnungsfortschritt, Web-Crypto-Adminzugang, JSON-Import/Export und Offline-App-Shell.
 
@@ -40,7 +40,7 @@ Ein Türchen wählen, Titel, Text, Aktivierung, Link und Button-Text bearbeiten.
 
 ### Testdatum
 
-Im Adminfenster unter „Kalender testen“ ein Datum wählen und „Testdatum setzen“ drücken. Das Adminfenster schließen, um Türchen im Kalender zu öffnen. Bei einem Dezemberdatum sind alle aktivierten Türchen bis einschließlich dieses Tags verfügbar; außerhalb des Dezembers bleiben sie wie im normalen Betrieb gesperrt. Eine sichtbare Meldung kennzeichnet den Testmodus.
+Im Adminfenster unter „Kalender testen“ ein Datum wählen und „Testdatum setzen“ drücken. Das Adminfenster schließen, um Türchen im Kalender zu öffnen. Bei einem Dezemberdatum sind alle aktivierten Türchen bis einschließlich dieses Tags verfügbar; außerhalb des Dezembers bleiben sie wie im normalen Betrieb gesperrt. Der Status im Adminfenster zeigt an, ob ein Testdatum aktiv ist.
 
 „Echtes Datum verwenden“ beendet den Test. Der Testmodus bleibt beim Schließen des Adminfensters aktiv, endet aber auch beim Neuladen. Testöffnungen werden ausschließlich im Arbeitsspeicher gehalten; der reguläre Öffnungsfortschritt bleibt erhalten. Testdatum und Testöffnungen werden nicht exportiert.
 

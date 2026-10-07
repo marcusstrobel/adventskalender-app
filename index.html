@@ -15,12 +15,12 @@
     <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="assets/icon-192.png" />
     <link rel="stylesheet" href="src/style.css" />
-    <title>Winterpost · Dein Adventskalender</title>
+    <title>Advent, Advent, ...</title>
   </head>
   <body>
     <header>
       <a class="brand" href="./"
-        ><span aria-hidden="true">✳</span> Winterpost</a
+        ><span aria-hidden="true">✳</span> Advent, Advent, ...</a
       >
       <div class="header-actions">
         <span id="offline" hidden>Offline</span
@@ -35,33 +35,9 @@
       </div>
     </header>
     <main>
-      <section class="intro">
-        <p class="eyebrow">DEIN ADVENTSKALENDER</p>
-        <h1>Ein bisschen Magie.<br /><em>Jeden Dezembertag.</em></h1>
-        <p>
-          24 kleine Überraschungen. Zeit zum Innehalten.<br />Und jeden Tag ein
-          Grund, sich zu freuen.
-        </p>
-        <div class="season">
-          <span aria-hidden="true">✧</span><span id="season-text"></span>
-        </div>
-      </section>
       <section class="calendar-section" aria-label="Adventskalender">
-        <div class="calendar-heading">
-          <span>DEZEMBER <span id="year"></span></span
-          ><span id="progress"></span>
-        </div>
-        <p id="test-banner" class="test-banner" role="status" hidden></p>
         <div id="calendar" class="calendar"></div>
-        <div class="legend">
-          <span>◌ Noch ein wenig Vorfreude</span><span>✧ Bereit zum Öffnen</span
-          ><span>✓ Schon entdeckt</span>
-        </div>
       </section>
-      <footer>
-        Mit Vorfreude gemacht <span>✧</span> Deine Momente bleiben auf diesem
-        Gerät.
-      </footer>
       <p id="status" role="status" class="status" hidden></p>
     </main>
     <dialog id="door-dialog">

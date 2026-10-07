@@ -86,57 +86,11 @@ main {
   margin: auto;
   padding: 0 28px;
 }
-.intro {
-  text-align: center;
-  padding: 45px 0 28px;
-  position: relative;
-}
 .eyebrow {
   font-size: 11px;
   font-weight: bold;
   letter-spacing: 2.5px;
   color: #86663b;
-}
-h1 {
-  font-family: Georgia, serif;
-  font-weight: normal;
-  font-size: clamp(36px, 5vw, 58px);
-  line-height: 1.12;
-  letter-spacing: -1.8px;
-  margin: 20px 0;
-}
-h1 em {
-  font-weight: normal;
-  color: #7c8f71;
-}
-.intro > p:not(.eyebrow) {
-  font-size: 14px;
-  line-height: 1.8;
-  color: #69766b;
-}
-.season {
-  display: inline-flex;
-  gap: 9px;
-  align-items: center;
-  background: #e9ede2;
-  border-radius: 30px;
-  padding: 10px 18px;
-  font-size: 12px;
-  margin: 12px 0;
-}
-.season > span:first-child {
-  font-size: 20px;
-}
-.calendar-heading {
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 0 17px;
-  font-size: 11px;
-  letter-spacing: 1.8px;
-}
-.calendar-heading > span:last-child {
-  letter-spacing: 0.2px;
-  color: #6a776e;
 }
 .calendar {
   display: grid;
@@ -220,24 +174,6 @@ h1 em {
 }
 .tile.seen .number {
   opacity: 0.6;
-}
-.legend {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  font-size: 11px;
-  color: #6b786b;
-  padding: 25px 0;
-}
-footer {
-  text-align: center;
-  font-size: 11px;
-  color: #7f887b;
-  margin: 12px 0 30px;
-  line-height: 1.7;
-}
-footer span {
-  margin: 0 10px;
 }
 dialog {
   border: 1px solid #d5ddce;
@@ -421,12 +357,6 @@ textarea {
   main {
     padding: 0 18px;
   }
-  .intro {
-    padding-top: 28px;
-  }
-  h1 {
-    font-size: 38px;
-  }
   .calendar {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -440,19 +370,11 @@ textarea {
   .tile-symbol {
     bottom: 9px;
   }
-  .legend {
-    gap: 12px;
-    flex-wrap: wrap;
-    font-size: 10px;
-  }
   dialog {
     padding: 32px 22px;
   }
   .admin-days {
     grid-template-columns: repeat(6, 1fr);
-  }
-  footer span {
-    display: block;
   }
   .header-actions {
     gap: 4px;
@@ -480,15 +402,28 @@ textarea {
 .test-controls .actions {
   flex-wrap: wrap;
 }
-.test-banner {
-  background: #eae0cb;
-  border: 1px solid #d6c6a4;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  line-height: 1.5;
-}
 #test-error {
   color: #a03927;
   font-size: 13px;
+}
+
+.calendar-section {
+  padding: 28px 0;
+}
+.brand {
+  font-size: clamp(18px, 4.7vw, 26px);
+}
+header {
+  gap: 12px;
+}
+@media (max-width: 600px) {
+  .brand {
+    gap: 6px;
+  }
+  .brand span {
+    font-size: 25px;
+  }
+  .calendar-section {
+    padding: 20px 0;
+  }
 }
