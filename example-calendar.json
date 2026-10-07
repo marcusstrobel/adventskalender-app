@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "doors": [
+    {
+      "day": 1,
+      "title": "Ein leiser Anfang",
+      "text": "Zünde eine Kerze an und nimm dir fünf Minuten nur für dich. Was möchtest du in dieser Adventszeit genießen?",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 2,
+      "title": "Ein warmer Becher",
+      "text": "Mach dir einen Tee oder eine heiße Schokolade. Halte die Tasse mit beiden Händen und genieße die Wärme.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 3,
+      "title": "Post von Herzen",
+      "text": "Schreibe einem Menschen, an den du oft denkst. Ein einziger herzlicher Satz kann einen ganzen Tag verändern.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 4,
+      "title": "Dein Lieblingslied",
+      "text": "Höre ein Lied, das dich an einen schönen Winter erinnert. Heute darfst du gerne mitsingen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 5,
+      "title": "Ein Licht für dich",
+      "text": "Stelle ein Licht ans Fenster. Ein kleiner heller Punkt macht die dunkle Jahreszeit ein bisschen freundlicher.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 6,
+      "title": "Eine kleine Überraschung",
+      "text": "Heute ist Nikolaustag. Verstecke eine kleine Aufmerksamkeit für jemanden, den du magst.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 7,
+      "title": "Ein Spaziergang",
+      "text": "Geh eine Runde an die frische Luft und entdecke drei Dinge, an denen du sonst vorbeigehst.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 8,
+      "title": "Zeit für Plätzchen",
+      "text": "Backe etwas Einfaches – oder genieße deinen Lieblingskeks ganz bewusst. Die Krümel dürfen bleiben.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 9,
+      "title": "Eine gute Erinnerung",
+      "text": "Suche ein Foto aus einem schönen Jahr heraus. Welche Geschichte steckt dahinter?",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 10,
+      "title": "Ein freundliches Wort",
+      "text": "Mache jemandem ein ehrliches Kompliment. Kleine Worte können lange nachklingen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 11,
+      "title": "Ein Abend ohne Eile",
+      "text": "Lege das Handy eine Weile zur Seite. Vielleicht wartet ein Buch, ein Spiel oder ein gutes Gespräch auf dich.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 12,
+      "title": "Halbzeit voller Vorfreude",
+      "text": "Zwölf kleine Momente liegen hinter dir. Welcher hat dich bisher besonders gefreut?",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 13,
+      "title": "Ein Blick nach draußen",
+      "text": "Sieh eine Minute lang in den Himmel. Atme langsam ein und wieder aus. Dieser Moment gehört dir.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 14,
+      "title": "Etwas selbst Gemachtes",
+      "text": "Falte einen Papierstern oder male eine kleine Karte. Es muss nicht perfekt sein, um Freude zu machen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 15,
+      "title": "Ein kleiner Dank",
+      "text": "Schreibe drei Dinge auf, für die du heute dankbar bist. Auch die ganz kleinen zählen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 16,
+      "title": "Dein Wintermärchen",
+      "text": "Lies eine Geschichte aus deiner Kindheit. Vielleicht möchtest du sie jemandem vorlesen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 17,
+      "title": "Ein Moment der Ruhe",
+      "text": "Mach es dir gemütlich und gönn dir zehn Minuten ohne Aufgabe. Du musst gerade nichts schaffen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 18,
+      "title": "Freude teilen",
+      "text": "Teile heute etwas: deine Zeit, einen Keks oder eine schöne Erinnerung.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 19,
+      "title": "Ein vertrauter Duft",
+      "text": "Orange, Zimt oder Tannengrün: Welcher Duft gehört für dich zum Dezember?",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 20,
+      "title": "Wünsche sammeln",
+      "text": "Notiere einen Wunsch, der sich nicht kaufen lässt. Vielleicht kannst du einen ersten kleinen Schritt machen.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 21,
+      "title": "Ein heller Gedanke",
+      "text": "Die längsten Nächte haben ihre eigene Schönheit. Suche heute ganz bewusst nach einem Lichtblick.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 22,
+      "title": "Zeit füreinander",
+      "text": "Ruf jemanden an, dessen Stimme du gerne hörst. Nimm dir Zeit zum Zuhören.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 23,
+      "title": "Fast ist es soweit",
+      "text": "Lass heute etwas Unwichtiges liegen. Vorfreude braucht keinen perfekten Plan.",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    },
+    {
+      "day": 24,
+      "title": "Frohe Weihnachten",
+      "text": "Wir wünschen dir Wärme, Geborgenheit und Menschen, mit denen du dich wohlfühlst. Frohe Weihnachten!",
+      "image": "",
+      "link": "",
+      "buttonText": "",
+      "enabled": true
+    }
+  ]
+}
