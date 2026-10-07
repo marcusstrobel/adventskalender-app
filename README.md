@@ -32,21 +32,21 @@ Beim Veröffentlichen neuer App-Dateien die Cache-Version in `sw.js` erhöhen. D
 
 ## Adminbereich
 
-Über das Zahnrad öffnen. Beim ersten Zugriff ein eigenes Passwort mit mindestens zwölf Zeichen festlegen und wiederholen. Es gibt kein Standardpasswort und keine Zugangsdaten im Repository. Danach öffnet nur eine erfolgreiche Passwortprüfung die Bearbeitung. Schließen oder Escape meldet ab.
+Über das Zahnrad öffnen. Der Zugang verwendet auf allen Geräten dasselbe fest konfigurierte Administrator-Passwort. Im Code liegt ausschließlich ein gesalzener Prüfwert; es gibt keine lokale Passwort-Ersteinrichtung. Nur eine erfolgreiche Passwortprüfung öffnet die Bearbeitung. Schließen oder Escape meldet ab.
 
 Ein Türchen wählen, Titel, Text, Aktivierung, Link und Button-Text bearbeiten. PNG-, JPEG- oder WebP-Bilder bis 300 KB werden eingebettet. „Änderungen speichern“ speichert den gesamten Entwurf. Wechsel zwischen Türchen übernimmt Eingaben in den Entwurf; Schließen verwirft seit dem letzten Speichern vorgenommene Änderungen. „Kalender zurücksetzen“ ersetzt nach Bestätigung die Inhalte durch die Beispiele, erhält aber Passwort und Öffnungsfortschritt.
 
 ### Sicherheitsgrenzen und Wiederherstellung
 
-Das Passwort wird nicht gespeichert. Web Crypto leitet mit PBKDF2-SHA-256, 310.000 Iterationen und einem zufälligen 16-Byte-Salt einen 256-Bit-Prüfwert ab. Nur Salt und Prüfwert liegen im lokalen Speicher; das Passwort ist nicht Teil des Exports.
+Das Passwort wird nicht gespeichert. Web Crypto leitet mit PBKDF2-SHA-256, 310.000 Iterationen und einem zufälligen 16-Byte-Salt einen 256-Bit-Prüfwert ab. Nur Salt und Prüfwert liegen in `src/admin-auth.js`; das Passwort ist weder im Repository noch im Export enthalten. Alte lokale Passwortdatensätze werden nicht mehr verwendet.
 
-Dies ist **kein serverseitiger Hochsicherheitsschutz**: Kalenderinhalte sind unverschlüsselt; Personen mit Zugriff auf Browser-Entwicklerwerkzeuge oder Gerät können Code und Speicher ändern, den Zugang zurücksetzen oder Inhalte vorzeitig lesen. Nicht für vertrauliche Daten verwenden. Jedes Gerät verwaltet sein eigenes Passwort. Bei mehreren offenen Adminfenstern gewinnt der letzte Speichervorgang.
+Dies ist **kein serverseitiger Hochsicherheitsschutz**: Kalenderinhalte sind unverschlüsselt; Personen mit Zugriff auf Browser-Entwicklerwerkzeuge oder Gerät können Code und Speicher ändern, den Zugang zurücksetzen oder Inhalte vorzeitig lesen. Nicht für vertrauliche Daten verwenden. Der feste Prüfwert ist öffentlich lesbar und erlaubt Offline-Passwortversuche. Bei mehreren offenen Adminfenstern gewinnt der letzte Speichervorgang.
 
-Passwort vergessen: In den Browser-Entwicklerwerkzeugen unter Anwendung/Speicher ausschließlich den Local-Storage-Schlüssel `winterpost.auth.v1` entfernen. Danach ein neues Passwort anlegen. Ein vollständiges Löschen der Websitedaten entfernt auch Inhalte und Fortschritt. Beschädigte Konfigurationen werden nicht automatisch überschrieben; die App zeigt eine Fehlermeldung und gegebenenfalls die Beispiele.
+Passwortänderungen erfolgen durch Erzeugen eines neuen Salt-/Prüfwert-Paars in `src/admin-auth.js` und Veröffentlichen einer neuen App-Version mit erhöhter Service-Worker-Cache-Version. Das Löschen lokaler Daten setzt das feste Passwort nicht zurück. Ein vollständiges Löschen der Websitedaten entfernt auch Inhalte und Fortschritt. Beschädigte Konfigurationen werden nicht automatisch überschrieben; die App zeigt eine Fehlermeldung und gegebenenfalls die Beispiele.
 
 ## Import und Export
 
-Im Adminbereich „JSON exportieren“ lädt den gesamten aktuellen Entwurf einschließlich Bildern herunter. Passwort und Öffnungsfortschritt werden bewusst nicht übertragen. Auf dem Zielgerät eigenen Adminzugang einrichten und „JSON importieren“ wählen. Erst nach erfolgreicher Validierung und einer Vorschau mit ausdrücklicher Bestätigung ersetzt der Import die bestehende Konfiguration. Abbrechen lässt sie unverändert. Ein fehlgeschlagener Schreibvorgang lässt den bisherigen Kalender erhalten.
+Im Adminbereich „JSON exportieren“ lädt den gesamten aktuellen Entwurf einschließlich Bildern herunter. Passwort und Öffnungsfortschritt werden bewusst nicht übertragen. Auf dem Zielgerät mit dem festen Administrator-Passwort anmelden und „JSON importieren“ wählen. Erst nach erfolgreicher Validierung und einer Vorschau mit ausdrücklicher Bestätigung ersetzt der Import die bestehende Konfiguration. Abbrechen lässt sie unverändert. Ein fehlgeschlagener Schreibvorgang lässt den bisherigen Kalender erhalten.
 
 `example-calendar.json` enthält 24 vollständige Beispiel-Türchen. Format:
 
@@ -82,4 +82,4 @@ Das verkürzte Beispiel zeigt ein Türchen; reale Dateien müssen genau 24 einde
 
 ## Manuelle Abnahme
 
-Auf Smartphone-Breite und Desktop prüfen: 24 Türchen ohne horizontales Scrollen; Datum vor Advent, 1. Dezember und 24. Dezember; Öffnen und Neuladen; Admin-Ersteinrichtung, falsches/richtiges Passwort; Bearbeitung und Speichern; Export und Import mit Abbrechen/Bestätigen; ungültiges JSON; installierte App nach erstmaligem Laden offline neu öffnen. Native Installationsabläufe müssen auf realem iOS/Android geprüft werden.
+Auf Smartphone-Breite und Desktop prüfen: 24 Türchen ohne horizontales Scrollen; Datum vor Advent, 1. Dezember und 24. Dezember; Öffnen und Neuladen; Adminanmeldung mit falschem/richtigem Passwort; Bearbeitung und Speichern; Export und Import mit Abbrechen/Bestätigen; ungültiges JSON; installierte App nach erstmaligem Laden offline neu öffnen. Native Installationsabläufe müssen auf realem iOS/Android geprüft werden.

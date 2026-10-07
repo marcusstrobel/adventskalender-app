@@ -1,13 +1,11 @@
+import { verifyAdminPassword } from "./admin-auth.js";
 import {
   isUnlocked,
   validateConfig,
-  passwordRecord,
-  verifyPassword,
 } from "./core.js";
 const $ = (id) => document.getElementById(id);
 const KEYS = {
   config: "winterpost.config.v1",
-  auth: "winterpost.auth.v1",
   opened: "winterpost.opened.v1",
 };
 let config,
@@ -99,38 +97,12 @@ function render() {
   }
   $("progress").textContent = `${count} / 24 entdeckt`;
 }
-function authRecord() {
-  const r = read(KEYS.auth);
-  if (
-    r &&
-    (!Array.isArray(r.salt) ||
-      r.salt.length !== 16 ||
-      !Array.isArray(r.hash) ||
-      r.hash.length !== 32)
-  )
-    throw new Error(
-      "Die lokalen Zugangsdaten sind beschädigt. Siehe Wiederherstellung in der README.",
-    );
-  return r;
-}
 $("admin-open").onclick = () => {
-  try {
-    const exists = !!authRecord();
-    $("auth-title").textContent = exists
-      ? "Willkommen zurück"
-      : "Dein Adminzugang";
-    $("auth-help").textContent = exists
-      ? "Öffne deine Kalenderwerkstatt mit deinem Passwort."
-      : "Lege auf diesem Gerät ein Passwort mit mindestens 12 Zeichen fest.";
-    $("repeat-label").hidden = exists;
-    $("repeat-password").required = !exists;
-    $("password").autocomplete = exists ? "current-password" : "new-password";
-    $("auth-error").textContent = "";
-    $("auth-form").reset();
-    $("auth-dialog").showModal();
-  } catch (e) {
-    tell(e.message);
-  }
+  $("auth-title").textContent = "Willkommen zurück";
+  $("auth-help").textContent = "Öffne deine Kalenderwerkstatt mit dem Administrator-Passwort.";
+  $("auth-error").textContent = "";
+  $("auth-form").reset();
+  $("auth-dialog").showModal();
 };
 $("auth-form").onsubmit = async (e) => {
   e.preventDefault();
@@ -138,16 +110,9 @@ $("auth-form").onsubmit = async (e) => {
   try {
     if (!crypto.subtle)
       throw new Error("Web Crypto benötigt HTTPS oder localhost.");
-    const record = authRecord(),
-      pw = $("password").value;
-    if (record) {
-      if (!(await verifyPassword(pw, record)))
-        throw new Error("Das Passwort stimmt nicht.");
-    } else {
-      if (pw !== $("repeat-password").value)
-        throw new Error("Die Passwörter stimmen nicht überein.");
-      write(KEYS.auth, await passwordRecord(pw));
-    }
+    if (!(await verifyAdminPassword($("password").value)))
+      throw new Error("Das Passwort stimmt nicht.");
+    if (!$("auth-dialog").open) return;
     authenticated = true;
     draft = structuredClone(config);
     selected = 1;

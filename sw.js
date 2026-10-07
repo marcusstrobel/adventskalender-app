@@ -1,10 +1,11 @@
-const CACHE = "winterpost-v1";
+const CACHE = "winterpost-v2";
 const FILES = [
   "./",
   "./index.html",
   "./src/style.css",
   "./src/app.js",
   "./src/core.js",
+  "./src/admin-auth.js",
   "./example-calendar.json",
   "./manifest.webmanifest",
   "./assets/icon.svg",
