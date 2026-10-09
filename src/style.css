@@ -115,6 +115,7 @@ main {
   gap: clamp(4px, 1.2vmin, 13px);
 }
 .tile {
+  touch-action: manipulation;
   min-width: 0;
   min-height: 0;
   padding: 0;
