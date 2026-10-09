@@ -1,4 +1,4 @@
-const CACHE = "winterpost-v7";
+const CACHE = "winterpost-v9";
 const FILES = [
   "./",
   "./index.html",
@@ -13,7 +13,12 @@ const FILES = [
   "./assets/icon-512.png",
 ];
 self.addEventListener("install", (e) =>
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES))),
+  e.waitUntil(
+    caches
+      .open(CACHE)
+      .then((c) => c.addAll(FILES))
+      .then(() => self.skipWaiting()),
+  ),
 );
 self.addEventListener("activate", (e) =>
   e.waitUntil(
